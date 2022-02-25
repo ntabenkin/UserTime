@@ -43,25 +43,54 @@ object DataProvider {
     val userList = listOf(
         User(
             id = 1,
-            name = "Nathan Tabenkin",
+            name = "Nathan",
             profile_name= "ntabenkin",
             dob = "07/17/1997",
             avatar = R.drawable.nate_avatar,
             posts = postList,
             followers = followersList,
             url = "www.facebook.com",
-            profile_description = "I like corn"
+            profile_description = "My Names Nathan"
         ),User(
-            id = 1,
-            name = "Mathew Murphy",
+            id = 2,
+            name = "Mathew",
             profile_name= "mmurphy34",
             dob = "07/17/1997",
             avatar = R.drawable.matt_avatar,
             posts = postList,
             followers = followersList,
             url = "www.facebook.com",
+            profile_description = "My names Mathew "
+        ),User(
+            id = 3,
+            name = "Nico",
+            profile_name= "nicoswavay33",
+            dob = "07/17/1997",
+            avatar = R.drawable.nico_avatar,
+            posts = postList,
+            followers = followersList,
+            url = "www.facebook.com",
+            profile_description = "My names Nico"
+        ),User(
+            id = 4,
+            name = "Diego",
+            profile_name= "dbunz444",
+            dob = "07/17/1997",
+            avatar = R.drawable.diego_avatar,
+            posts = postList,
+            followers = followersList,
+            url = "www.facebook.com",
+            profile_description = "My Names Diego"
+        ),User(
+            id = 5,
+            name = "Matias",
+            profile_name= "mtais44",
+            dob = "07/17/1997",
+            avatar = R.drawable.andres_avatar,
+            posts = postList,
+            followers = followersList,
+            url = "www.facebook.com",
             profile_description = "I like apples"
-
         )
     )
 }

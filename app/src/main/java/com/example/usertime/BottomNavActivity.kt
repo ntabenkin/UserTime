@@ -16,20 +16,16 @@ import androidx.navigation.compose.rememberNavController
 
 @Composable
 fun NavigationGraph(navController: NavHostController) {
-    val ROUTE_USER_DETAIL = "profile/{user}"
-    val user = DataProvider.userList[0]
-    //navController.currentBackStackEntry?.arguments?.putParcelable("user", user)
-   // navController.navigate(ROUTE_USER_DETAIL)
-
     NavHost(navController, startDestination = BottomNavItem.Home.route) {
         composable(BottomNavItem.Home.route) {
-            RecyclerContent()
+            RecyclerContent(navController)
         }
-        composable(ROUTE_USER_DETAIL) { entry ->
-            val userObject = navController.previousBackStackEntry?.arguments?.getParcelable<User>("user")
-            if (userObject != null) {
-                ProfileScreen(userObject)
+        composable("profile") {
+            val person = navController.previousBackStackEntry?.savedStateHandle?.get<User>("user")
+            person?.let{
+                    ProfileScreen(person)
             }
+
         }
     }
 }
@@ -57,7 +53,6 @@ fun BottomNavMenu(navController: NavController) {
                 selected = currentRoute == item.route,
                 onClick = {
                     navController.navigate(item.route) {
-
                         navController.graph.startDestinationRoute?.let { screen_route ->
                             popUpTo(screen_route) {
                                 saveState = true

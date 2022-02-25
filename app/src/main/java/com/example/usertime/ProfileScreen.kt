@@ -37,67 +37,66 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavBackStackEntry
 
 
 @Composable
-fun ProfileScreen(user: User) {
+fun ProfileScreen( user: User) {
     var selectedTabIntex by remember {
         mutableStateOf(0)
     }
-    Column(modifier = Modifier.fillMaxSize()) {
-        TopBar(name = user.name, modifier = Modifier.padding(16.dp))
-        Spacer(modifier = Modifier.height(4.dp))
-        ProfileSection(user)
-        Spacer(modifier = Modifier.height(25.dp))
-        ButtonSection()
-        Spacer(modifier = Modifier.height(25.dp))
-        HighlightSection(
-            highlights = listOf(
-                ImageWithText(
-                    image = painterResource(id = R.drawable.andres_avatar),
-                    text = "My Highlights"
+        Column(modifier = Modifier.fillMaxSize()) {
+            TopBar(name = user.name, modifier = Modifier.padding(16.dp))
+            Spacer(modifier = Modifier.height(4.dp))
+            ProfileSection(user)
+            Spacer(modifier = Modifier.height(25.dp))
+            ButtonSection()
+            Spacer(modifier = Modifier.height(25.dp))
+            HighlightSection(
+                highlights = listOf(
+                    ImageWithText(
+                        image = painterResource(id = user.avatar),
+                        text = "My Highlights"
+                    )
+                ),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 20.dp)
+            )
+            Spacer(modifier = Modifier.height(10.dp))
+            PostTabView(
+                imageWithText = listOf(
+                    ImageWithText(
+                        image = painterResource(id = R.drawable.ic_grid),
+                        text = "Posts"
+                    ),
+                    ImageWithText(
+                        image = painterResource(id = R.drawable.ic_reels),
+                        text = "Reels"
+                    ),
+                    ImageWithText(
+                        image = painterResource(id = R.drawable.ic_igtv),
+                        text = "IGTV"
+                    ),
+                    ImageWithText(
+                        image = painterResource(id = R.drawable.ic_profile),
+                        text = "Profile"
+                    ),
                 )
-            ),
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 20.dp)
-        )
-        Spacer(modifier = Modifier.height(10.dp))
-        PostTabView(
-            imageWithText = listOf(
-                ImageWithText(
-                    image = painterResource(id = R.drawable.ic_grid),
-                    text = "Posts"
-                ),
-                ImageWithText(
-                    image = painterResource(id = R.drawable.ic_reels),
-                    text = "Reels"
-                ),
-                ImageWithText(
-                    image = painterResource(id = R.drawable.ic_igtv),
-                    text = "IGTV"
-                ),
-                ImageWithText(
-                    image = painterResource(id = R.drawable.ic_profile),
-                    text = "Profile"
-                ),
-            )
-        ) {
-            selectedTabIntex = it
+            ) {
+                selectedTabIntex = it
+            }
+            when (selectedTabIntex) {
+                0 -> PostSection(
+                    posts = listOf(
+                        painterResource(id = user.posts[0].img),
+                        painterResource(id = user.posts[1].img),
+                        painterResource(id = user.posts[2].img),
+                        painterResource(id = user.posts[3].img)
+                    ),
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
         }
-        when (selectedTabIntex) {
-            0 -> PostSection(
-                posts = listOf(
-                    painterResource(id = R.drawable.andres_avatar),
-                    painterResource(id = R.drawable.nico_avatar),
-                    painterResource(id = R.drawable.diego_avatar),
-                    painterResource(id = R.drawable.nate_avatar)
-                ),
-                modifier = Modifier.fillMaxWidth()
-            )
-        }
-    }
 }
 
 @Composable
@@ -148,7 +147,7 @@ fun ProfileSection(user: User) {
                 .padding(horizontal = 20.dp)
         ) {
             RoundImage(
-                image = painterResource(id = R.drawable.andres_avatar),
+                image = painterResource(id = user.avatar),
                 modifier = Modifier
                     .size(100.dp)
                     .weight(3f)

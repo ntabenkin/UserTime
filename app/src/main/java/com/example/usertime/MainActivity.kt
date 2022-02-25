@@ -45,9 +45,9 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-private fun PostImage(post: Posts) {
+private fun PostImage(post: User) {
     Image(
-        painter = painterResource(id = post.img),
+        painter = painterResource(id = post.avatar),
         contentDescription = null,
         contentScale = ContentScale.Crop,
         modifier = Modifier
@@ -58,14 +58,15 @@ private fun PostImage(post: Posts) {
 }
 @Composable
 fun PostHomeContent(navController: NavController) {
-    val post = remember { DataProvider.postList }
+    val user = remember { DataProvider.userList }
+    val posts = remember { DataProvider.postList }
     LazyColumn(
         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
     ) {
         items(
-            items = post,
+            items = user,
             itemContent = {
-                PostListItem(post = it, navController = navController)
+                PostListItem(posts = it, navController = navController)
             })
     }
 }
@@ -92,19 +93,20 @@ fun RecyclerContent(navController: NavController) {
 }
 
 @Composable
-fun PostListItem(post:Posts, navController: NavController) {
+fun PostListItem(posts:User, navController: NavController) {
     val selected = remember { mutableStateOf(false) }
     Card(
         modifier = Modifier
             .padding(horizontal = 8.dp, vertical = 8.dp)
             .fillMaxWidth()
-            .clickable { navController.navigate(BottomNavItem.Profile.route)},
+            .clickable { navController.currentBackStackEntry?.savedStateHandle?.set("user", posts)
+                navController.navigate("profile") },
         elevation = 2.dp,
         backgroundColor = Color.White,
         shape = RoundedCornerShape(corner = CornerSize(16.dp))
     ) {
         Row {
-            PostImage(post)
+            PostImage(posts)
             Column(
                 modifier = Modifier
                     .padding(16.dp)
@@ -112,17 +114,18 @@ fun PostListItem(post:Posts, navController: NavController) {
                     .align(Alignment.CenterVertically)
             ) {
 
-                Text(text = post.date, style = MaterialTheme.typography.h6)
-                Text(text = post.description, style = MaterialTheme.typography.caption)
+                Text(text = posts.posts[0].description, style = MaterialTheme.typography.h6)
+                Text(text = posts.name, style = MaterialTheme.typography.caption)
+                Spacer(modifier = Modifier.height(16.dp))
                 Button(
                     colors = ButtonDefaults.buttonColors(
                         backgroundColor = if (selected.value) Color.Blue else Color.Gray),
                     onClick = { selected.value = !selected.value } ,
                     // Uses ButtonDefaults.ContentPadding by default
                     contentPadding = PaddingValues(
-                        start = 20.dp,
+                        start = 2.dp,
                         top = 12.dp,
-                        end = 20.dp,
+                        end = 2.dp,
                         bottom = 12.dp
                     )
                 ) {
