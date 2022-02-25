@@ -12,6 +12,8 @@ data class User(
     val avatar: Int = 0,
     val posts: List<Posts>,
     val followers: List<String>,
+    val following: List<String>,
     val url: String,
-    val profile_description: String
+    val profile_description: String,
+
 ) : Parcelable

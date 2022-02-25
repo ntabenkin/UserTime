@@ -40,6 +40,7 @@ object DataProvider {
         )
     )
     val followersList = listOf( "ntabenkin", "mmurphy34", "aoller44")
+    val followingList = listOf( "ntabenkin", "mmurphy34", "aoller44","ntabenkin", "mmurphy34", "aoller44")
     val userList = listOf(
         User(
             id = 1,
@@ -49,6 +50,7 @@ object DataProvider {
             avatar = R.drawable.nate_avatar,
             posts = postList,
             followers = followersList,
+            following = followingList,
             url = "www.facebook.com",
             profile_description = "My Names Nathan"
         ),User(
@@ -59,6 +61,7 @@ object DataProvider {
             avatar = R.drawable.matt_avatar,
             posts = postList,
             followers = followersList,
+            following = followingList,
             url = "www.facebook.com",
             profile_description = "My names Mathew "
         ),User(
@@ -69,6 +72,7 @@ object DataProvider {
             avatar = R.drawable.nico_avatar,
             posts = postList,
             followers = followersList,
+            following = followingList,
             url = "www.facebook.com",
             profile_description = "My names Nico"
         ),User(
@@ -79,16 +83,41 @@ object DataProvider {
             avatar = R.drawable.diego_avatar,
             posts = postList,
             followers = followersList,
+            following = followingList,
             url = "www.facebook.com",
             profile_description = "My Names Diego"
         ),User(
             id = 5,
-            name = "Matias",
-            profile_name= "mtais44",
+            name = "Andres",
+            profile_name= "aoler44",
             dob = "07/17/1997",
             avatar = R.drawable.andres_avatar,
             posts = postList,
             followers = followersList,
+            following = followingList,
+            url = "www.facebook.com",
+            profile_description = "I like apples"
+        ),User(
+            id = 6,
+            name = "Matias",
+            profile_name= "mtais44",
+            dob = "07/17/1997",
+            avatar = R.drawable.matias_avatar,
+            posts = postList,
+            followers = followersList,
+            following = followingList,
+            url = "www.facebook.com",
+            profile_description = "I like apples"
+        )
+        ,User(
+            id = 7,
+            name = "Juan",
+            profile_name= "jguer55",
+            dob = "07/17/1997",
+            avatar = R.drawable.juan_avatar,
+            posts = postList,
+            followers = followersList,
+            following = followingList,
             url = "www.facebook.com",
             profile_description = "I like apples"
         )

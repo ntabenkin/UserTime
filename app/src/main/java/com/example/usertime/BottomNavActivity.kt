@@ -23,7 +23,7 @@ fun NavigationGraph(navController: NavHostController) {
         composable("profile") {
             val person = navController.previousBackStackEntry?.savedStateHandle?.get<User>("user")
             person?.let{
-                    ProfileScreen(person)
+                    ProfileScreen(person,navController)
             }
 
         }

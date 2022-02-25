@@ -3,16 +3,15 @@ package com.example.usertime
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.*
 import androidx.compose.material.Icon
-import androidx.compose.material.Tab
-import androidx.compose.material.TabRow
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.KeyboardArrowDown
@@ -37,15 +36,16 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 
 
 @Composable
-fun ProfileScreen( user: User) {
+fun ProfileScreen(user: User, navController: NavController) {
     var selectedTabIntex by remember {
         mutableStateOf(0)
     }
         Column(modifier = Modifier.fillMaxSize()) {
-            TopBar(name = user.name, modifier = Modifier.padding(16.dp))
+            TopBar(name = user.name, modifier = Modifier.padding(16.dp),navController)
             Spacer(modifier = Modifier.height(4.dp))
             ProfileSection(user)
             Spacer(modifier = Modifier.height(25.dp))
@@ -95,6 +95,24 @@ fun ProfileScreen( user: User) {
                     ),
                     modifier = Modifier.fillMaxWidth()
                 )
+                1 -> PostSection(
+                    posts = listOf(
+                        painterResource(id = user.posts[4].img),
+                        painterResource(id = user.posts[5].img),
+                        painterResource(id = user.posts[6].img),
+                        painterResource(id = user.posts[0].img)
+                    ),
+                    modifier = Modifier.fillMaxWidth()
+                )
+                2 -> PostSection(
+                    posts = listOf(
+                        painterResource(id = user.posts[1].img),
+                        painterResource(id = user.posts[2].img),
+                        painterResource(id = user.posts[3].img),
+                        painterResource(id = user.posts[4].img)
+                    ),
+                    modifier = Modifier.fillMaxWidth()
+                )
             }
         }
 }
@@ -102,7 +120,8 @@ fun ProfileScreen( user: User) {
 @Composable
 fun TopBar(
     name: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    navController: NavController
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -114,7 +133,9 @@ fun TopBar(
             imageVector = Icons.Default.ArrowBack,
             contentDescription = "Back",
             tint = Color.Black,
-            modifier = Modifier.size(32.dp)
+            modifier = Modifier
+                .size(32.dp)
+                .clickable { navController.navigate("home") }
         )
         Text(
             text = name,
@@ -153,7 +174,7 @@ fun ProfileSection(user: User) {
                     .weight(3f)
             )
             Spacer(modifier = Modifier.width(16.dp))
-            StatSection(modifier = Modifier.weight(7f))
+            StatSection(modifier = Modifier.weight(7f),user)
         }
         Spacer(modifier = Modifier.height(10.dp))
         ProfileDescription(
@@ -187,15 +208,15 @@ fun RoundImage(
 }
 
 @Composable
-fun StatSection(modifier: Modifier = Modifier) {
+fun StatSection(modifier: Modifier = Modifier,user: User) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceAround,
         modifier = modifier
     ) {
-        ProfileStat(numberText = "0", text = "Posts")
-        ProfileStat(numberText = "346", text = "Followers")
-        ProfileStat(numberText = "368", text = "Following")
+        ProfileStat(numberText = user.posts.size.toString(), text = "Posts")
+        ProfileStat(numberText = user.followers.size.toString(), text = "Followers")
+        ProfileStat(numberText = user.following.size.toString(), text = "Following")
     }
 }
 

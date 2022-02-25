@@ -114,8 +114,8 @@ fun PostListItem(posts:User, navController: NavController) {
                     .align(Alignment.CenterVertically)
             ) {
 
-                Text(text = posts.posts[0].description, style = MaterialTheme.typography.h6)
-                Text(text = posts.name, style = MaterialTheme.typography.caption)
+                Text(text = posts.name, style = MaterialTheme.typography.h6)
+                Text(text = posts.profile_description, style = MaterialTheme.typography.caption)
                 Spacer(modifier = Modifier.height(16.dp))
                 Button(
                     colors = ButtonDefaults.buttonColors(
