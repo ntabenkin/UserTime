@@ -28,6 +28,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 
 class MainActivity : ComponentActivity() {
     private val userState by viewModels<UserStateViewModel>()
@@ -56,7 +57,7 @@ private fun PostImage(post: Posts) {
     )
 }
 @Composable
-fun PostHomeContent() {
+fun PostHomeContent(navController: NavController) {
     val post = remember { DataProvider.postList }
     LazyColumn(
         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
@@ -64,12 +65,12 @@ fun PostHomeContent() {
         items(
             items = post,
             itemContent = {
-                PostListItem(post = it)
+                PostListItem(post = it, navController = navController)
             })
     }
 }
 @Composable
-fun RecyclerContent() {
+fun RecyclerContent(navController: NavController) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -86,18 +87,18 @@ fun RecyclerContent() {
                 elevation = 10.dp
             )
         }, content = {
-            PostHomeContent()
+            PostHomeContent(navController)
         })
 }
 
 @Composable
-fun PostListItem(post:Posts) {
+fun PostListItem(post:Posts, navController: NavController) {
     val selected = remember { mutableStateOf(false) }
     Card(
         modifier = Modifier
             .padding(horizontal = 8.dp, vertical = 8.dp)
             .fillMaxWidth()
-            .clickable {  },
+            .clickable { navController.navigate(BottomNavItem.Profile.route)},
         elevation = 2.dp,
         backgroundColor = Color.White,
         shape = RoundedCornerShape(corner = CornerSize(16.dp))

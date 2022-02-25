@@ -37,18 +37,18 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-
+import androidx.navigation.NavBackStackEntry
 
 
 @Composable
-fun ProfileScreen() {
+fun ProfileScreen(user: User) {
     var selectedTabIntex by remember {
         mutableStateOf(0)
     }
     Column(modifier = Modifier.fillMaxSize()) {
-        TopBar(name = "ntabenkin", modifier = Modifier.padding(16.dp))
+        TopBar(name = user.name, modifier = Modifier.padding(16.dp))
         Spacer(modifier = Modifier.height(4.dp))
-        ProfileSection()
+        ProfileSection(user)
         Spacer(modifier = Modifier.height(25.dp))
         ButtonSection()
         Spacer(modifier = Modifier.height(25.dp))
@@ -139,7 +139,7 @@ fun TopBar(
 }
 
 @Composable
-fun ProfileSection() {
+fun ProfileSection(user: User) {
     Column(Modifier.fillMaxWidth()) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -158,10 +158,10 @@ fun ProfileSection() {
         }
         Spacer(modifier = Modifier.height(10.dp))
         ProfileDescription(
-            displayName = "Andres Oller",
-            description = "Android Engineer",
-            url = "",
-            followedBy = listOf("ntabenkin", "mmurphy34"),
+            displayName = user.profile_name,
+            description = user.profile_description,
+            url = user.url,
+            followedBy = user.followers,
             otherCount = 18
         )
     }

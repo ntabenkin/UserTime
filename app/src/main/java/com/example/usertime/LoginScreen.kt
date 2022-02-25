@@ -21,7 +21,7 @@ import kotlinx.coroutines.launch
 fun ApplicationSwitcher() {
     val vm = UserState.current
     if (vm.isLoggedIn) {
-        RecyclerContent()
+        MainScreenView()
     } else {
         LoginScreen()
     }

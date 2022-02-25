@@ -39,4 +39,29 @@ object DataProvider {
             description = "Heading in time something is basic description"
         )
     )
+    val followersList = listOf( "ntabenkin", "mmurphy34", "aoller44")
+    val userList = listOf(
+        User(
+            id = 1,
+            name = "Nathan Tabenkin",
+            profile_name= "ntabenkin",
+            dob = "07/17/1997",
+            avatar = R.drawable.nate_avatar,
+            posts = postList,
+            followers = followersList,
+            url = "www.facebook.com",
+            profile_description = "I like corn"
+        ),User(
+            id = 1,
+            name = "Mathew Murphy",
+            profile_name= "mmurphy34",
+            dob = "07/17/1997",
+            avatar = R.drawable.matt_avatar,
+            posts = postList,
+            followers = followersList,
+            url = "www.facebook.com",
+            profile_description = "I like apples"
+
+        )
+    )
 }
