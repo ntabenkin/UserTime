@@ -19,6 +19,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.usertime.dropdownmenu.ProfileDropDown
 
 @Composable
 fun TopBar(
@@ -47,5 +48,6 @@ fun TopBar(
             fontSize = 22.sp,
             textAlign = TextAlign.Center
         )
+        ProfileDropDown()
     }
 }
