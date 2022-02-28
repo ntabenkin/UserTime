@@ -37,6 +37,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.usertime.toolbar.TopBar
 
 
 @Composable
@@ -49,7 +50,7 @@ fun ProfileScreen(user: User, navController: NavController) {
             Spacer(modifier = Modifier.height(4.dp))
             ProfileSection(user)
             Spacer(modifier = Modifier.height(25.dp))
-            ButtonSection()
+//            ButtonSection()
             Spacer(modifier = Modifier.height(25.dp))
             HighlightSection(
                 highlights = listOf(
@@ -72,15 +73,7 @@ fun ProfileScreen(user: User, navController: NavController) {
                     ImageWithText(
                         image = painterResource(id = R.drawable.ic_reels),
                         text = "Reels"
-                    ),
-                    ImageWithText(
-                        image = painterResource(id = R.drawable.ic_igtv),
-                        text = "IGTV"
-                    ),
-                    ImageWithText(
-                        image = painterResource(id = R.drawable.ic_profile),
-                        text = "Profile"
-                    ),
+                    )
                 )
             ) {
                 selectedTabIntex = it
@@ -115,47 +108,6 @@ fun ProfileScreen(user: User, navController: NavController) {
                 )
             }
         }
-}
-
-@Composable
-fun TopBar(
-    name: String,
-    modifier: Modifier = Modifier,
-    navController: NavController
-) {
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceBetween,
-        modifier = modifier
-            .fillMaxWidth()
-    ) {
-        Icon(
-            imageVector = Icons.Default.ArrowBack,
-            contentDescription = "Back",
-            tint = Color.Black,
-            modifier = Modifier
-                .size(32.dp)
-                .clickable { navController.navigate("home") }
-        )
-        Text(
-            text = name,
-            overflow = TextOverflow.Ellipsis,
-            fontWeight = FontWeight.Bold,
-            fontSize = 22.sp
-        )
-        Icon(
-            painter = painterResource(id = R.drawable.ic_bell),
-            contentDescription = "Back",
-            tint = Color.Black,
-            modifier = Modifier.size(28.dp)
-        )
-        Icon(
-            painter = painterResource(id = R.drawable.ic_dotmenu),
-            contentDescription = "Back",
-            tint = Color.Black,
-            modifier = Modifier.size(32.dp)
-        )
-    }
 }
 
 @Composable
