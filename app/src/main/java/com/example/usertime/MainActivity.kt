@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -118,14 +119,14 @@ fun PostListItem(posts:User, navController: NavController) {
                     .fillMaxWidth()
                     .fillMaxSize()
             ) {
-                Text(text = posts.name, style = MaterialTheme.typography.h6)
+                Text(text = posts.name, style = MaterialTheme.typography.h6, color = Color.Magenta)
                 Text(text = posts.profile_description, style = MaterialTheme.typography.caption)
                 Spacer(modifier = Modifier.height(16.dp))
                 Button(
                     modifier = Modifier
                         .padding(top = 80.dp),
                     colors = ButtonDefaults.buttonColors(
-                        backgroundColor = if (selected.value) Color.Blue else Color.Gray),
+                        backgroundColor = if (selected.value) Color.Transparent else Color.Transparent),
                     onClick = { selected.value = !selected.value } ,
                     // Uses ButtonDefaults.ContentPadding by default
                     contentPadding = PaddingValues(
@@ -143,7 +144,7 @@ fun PostListItem(posts:User, navController: NavController) {
                         modifier = Modifier.size(ButtonDefaults.IconSize)
                     )
                     Spacer(Modifier.size(ButtonDefaults.IconSpacing))
-                    Text("Like")
+                    if(!selected.value)Text("Like")else Text("")
                 }
             }
 

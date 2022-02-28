@@ -44,82 +44,82 @@ object DataProvider {
     val userList = listOf(
         User(
             id = 1,
-            name = "Nathan",
+            name = "Nathan Tabenkin",
             profile_name= "ntabenkin",
             dob = "07/17/1997",
             avatar = R.drawable.nate_avatar,
             posts = postList,
             followers = followersList,
             following = followingList,
-            url = "www.facebook.com",
+            url = "ntabenkin@ovloop.com",
             profile_description = "My Names Nathan"
         ),User(
             id = 2,
-            name = "Mathew",
+            name = "Matthew Murphy",
             profile_name= "mmurphy34",
             dob = "07/17/1997",
             avatar = R.drawable.matt_avatar,
             posts = postList,
             followers = followersList,
             following = followingList,
-            url = "www.facebook.com",
-            profile_description = "My names Mathew "
+            url = "mmurphy@ovloop.com",
+            profile_description = "Android Engineer"
         ),User(
             id = 3,
-            name = "Nico",
+            name = "Nicolas Calderini",
             profile_name= "nicoswavay33",
             dob = "07/17/1997",
             avatar = R.drawable.nico_avatar,
             posts = postList,
             followers = followersList,
             following = followingList,
-            url = "www.facebook.com",
-            profile_description = "My names Nico"
+            url = "ncalderini@ovloop.com",
+            profile_description = "Alternate Team Lead - Android Engineer"
         ),User(
             id = 4,
-            name = "Diego",
+            name = "Diego Iribarne",
             profile_name= "dbunz444",
             dob = "07/17/1997",
             avatar = R.drawable.diego_avatar,
             posts = postList,
             followers = followersList,
             following = followingList,
-            url = "www.facebook.com",
-            profile_description = "My Names Diego"
+            url = "ncalderini@ovloop.com",
+            profile_description = "Android Engineer"
         ),User(
             id = 5,
-            name = "Andres",
+            name = "Andres Oller",
             profile_name= "aoler44",
             dob = "07/17/1997",
             avatar = R.drawable.andres_avatar,
             posts = postList,
             followers = followersList,
             following = followingList,
-            url = "www.facebook.com",
-            profile_description = "I like apples"
+            url = "aoller@ovloop.com",
+            profile_description = "Team Lead - Android Engineer"
         ),User(
             id = 6,
-            name = "Matias",
+            name = "Matias Cestoni",
             profile_name= "mtais44",
             dob = "07/17/1997",
             avatar = R.drawable.matias_avatar,
             posts = postList,
             followers = followersList,
             following = followingList,
-            url = "www.facebook.com",
-            profile_description = "I like apples"
+            url = "mcestoni@ovloop.com",
+            profile_description = "Android Engineer"
         )
         ,User(
             id = 7,
-            name = "Juan",
+            name = "Juan Guerrero",
             profile_name= "jguer55",
             dob = "07/17/1997",
             avatar = R.drawable.juan_avatar,
             posts = postList,
             followers = followersList,
             following = followingList,
-            url = "www.facebook.com",
-            profile_description = "I like apples"
+            url = "jguerrero@ovloop.com",
+            profile_description = "Android Engineer"
         )
     )
 }
