@@ -14,13 +14,11 @@ import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.outlined.Favorite
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -29,6 +27,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     private val userState by viewModels<UserStateViewModel>()
@@ -46,12 +45,14 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 private fun PostImage(post: User) {
+    Spacer(modifier = Modifier.height(16.dp))
     Image(
         painter = painterResource(id = post.avatar),
         contentDescription = null,
         contentScale = ContentScale.Crop,
         modifier = Modifier
             .padding(8.dp)
+            .padding(top = 10.dp)
             .size(200.dp)
             .clip(RoundedCornerShape(corner = CornerSize(16.dp)))
     )
@@ -59,7 +60,6 @@ private fun PostImage(post: User) {
 @Composable
 fun PostHomeContent(navController: NavController) {
     val user = remember { DataProvider.userList }
-    val posts = remember { DataProvider.postList }
     LazyColumn(
         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
     ) {
@@ -72,15 +72,21 @@ fun PostHomeContent(navController: NavController) {
 }
 @Composable
 fun RecyclerContent(navController: NavController) {
+    val vm = UserState.current
+    val coroutineScope = rememberCoroutineScope()
     Scaffold(
         topBar = {
             TopAppBar(
                 title = {
-                    Text(text = "User Posts")
+                    Text(text = "Android Team")
                 },
-                navigationIcon = {
-                    IconButton(onClick = { }) {
-                        Icon(Icons.Filled.Menu, "Menu")
+                actions = {
+                    IconButton(onClick = {
+                        coroutineScope.launch {
+                            vm.signOut()
+                        }
+                    }) {
+                        Icon(Icons.Filled.ExitToApp, null)
                     }
                 },
                 backgroundColor = MaterialTheme.colors.primary,
@@ -105,28 +111,28 @@ fun PostListItem(posts:User, navController: NavController) {
         backgroundColor = Color.White,
         shape = RoundedCornerShape(corner = CornerSize(16.dp))
     ) {
-        Row {
             PostImage(posts)
             Column(
                 modifier = Modifier
                     .padding(16.dp)
                     .fillMaxWidth()
-                    .align(Alignment.CenterVertically)
+                    .fillMaxSize()
             ) {
-
                 Text(text = posts.name, style = MaterialTheme.typography.h6)
                 Text(text = posts.profile_description, style = MaterialTheme.typography.caption)
                 Spacer(modifier = Modifier.height(16.dp))
                 Button(
+                    modifier = Modifier
+                        .padding(top = 80.dp),
                     colors = ButtonDefaults.buttonColors(
                         backgroundColor = if (selected.value) Color.Blue else Color.Gray),
                     onClick = { selected.value = !selected.value } ,
                     // Uses ButtonDefaults.ContentPadding by default
                     contentPadding = PaddingValues(
                         start = 2.dp,
-                        top = 12.dp,
+                        top = 10.dp,
                         end = 2.dp,
-                        bottom = 12.dp
+                        bottom = 10.dp
                     )
                 ) {
                     // Inner content including an icon and a text label
@@ -140,6 +146,6 @@ fun PostListItem(posts:User, navController: NavController) {
                     Text("Like")
                 }
             }
-        }
+
     }
 }
