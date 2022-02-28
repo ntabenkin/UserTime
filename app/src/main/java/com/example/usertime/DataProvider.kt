@@ -55,7 +55,7 @@ object DataProvider {
             profile_description = "My Names Nathan"
         ),User(
             id = 2,
-            name = "Mathew",
+            name = "Matthew",
             profile_name= "mmurphy34",
             dob = "07/17/1997",
             avatar = R.drawable.matt_avatar,
