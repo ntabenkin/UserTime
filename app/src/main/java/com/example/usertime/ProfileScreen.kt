@@ -50,7 +50,6 @@ fun ProfileScreen(user: User, navController: NavController) {
             Spacer(modifier = Modifier.height(4.dp))
             ProfileSection(user)
             Spacer(modifier = Modifier.height(25.dp))
-//            ButtonSection()
             Spacer(modifier = Modifier.height(25.dp))
             HighlightSection(
                 highlights = listOf(
