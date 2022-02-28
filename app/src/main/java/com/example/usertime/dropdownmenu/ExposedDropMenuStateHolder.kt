@@ -15,8 +15,8 @@ class ExposedDropMenuStateHolder {
         } else {
             R.drawable.ic_arrow_down
         }
-    val items = (1..5).map {
-        "option $it"
+    val items = (1..3).map {
+        "Option $it"
     }
 
     fun onEnabled(newValue: Boolean) {
@@ -27,11 +27,6 @@ class ExposedDropMenuStateHolder {
         selectedIndex = newValue
         value = items[selectedIndex]
     }
-
-    fun onSize(newValue: Size) {
-        size = newValue
-    }
-
 }
 
 @Composable
