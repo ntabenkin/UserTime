@@ -21,9 +21,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 
-class ToolBar {
-
-}
 @Composable
 fun TopBar(
     name: String,
