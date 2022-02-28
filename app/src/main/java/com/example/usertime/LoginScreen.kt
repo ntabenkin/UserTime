@@ -43,7 +43,8 @@ fun LoginScreen() {
         if (vm.isBusy) {
             CircularProgressIndicator()
         } else {
-            Text("Login Screen", fontSize = 32.sp)
+            val team = list.size
+            Text("Login Screen $team", fontSize = 32.sp)
             Spacer(modifier = Modifier.height(16.dp))
             Email(email)
             Spacer(modifier = Modifier.height(16.dp))

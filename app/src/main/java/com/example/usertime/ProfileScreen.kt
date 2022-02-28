@@ -48,7 +48,7 @@ fun ProfileScreen(user: User, navController: NavController) {
         Column(modifier = Modifier.fillMaxSize()) {
             TopBar(name = user.name, modifier = Modifier.padding(16.dp),navController)
             Spacer(modifier = Modifier.height(4.dp))
-            ProfileSection(user)
+            ProfileSection(user,navController)
             Spacer(modifier = Modifier.height(25.dp))
             Spacer(modifier = Modifier.height(25.dp))
             HighlightSection(
@@ -60,6 +60,7 @@ fun ProfileScreen(user: User, navController: NavController) {
                 ),
                 modifier = Modifier
                     .fillMaxWidth()
+                    .clickable {  }
                     .padding(horizontal = 20.dp)
             )
             Spacer(modifier = Modifier.height(10.dp))
@@ -110,7 +111,7 @@ fun ProfileScreen(user: User, navController: NavController) {
 }
 
 @Composable
-fun ProfileSection(user: User) {
+fun ProfileSection(user: User,navController: NavController) {
     Column(Modifier.fillMaxWidth()) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -125,7 +126,7 @@ fun ProfileSection(user: User) {
                     .weight(3f)
             )
             Spacer(modifier = Modifier.width(16.dp))
-            StatSection(modifier = Modifier.weight(7f),user)
+            StatSection(modifier = Modifier.weight(7f),user,navController)
         }
         Spacer(modifier = Modifier.height(10.dp))
         ProfileDescription(
@@ -159,33 +160,35 @@ fun RoundImage(
 }
 
 @Composable
-fun StatSection(modifier: Modifier = Modifier,user: User) {
+fun StatSection(modifier: Modifier = Modifier,user: User,navController: NavController) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceAround,
         modifier = modifier
     ) {
-        ProfileStat(numberText = user.posts.size.toString(), text = "Posts")
-        ProfileStat(numberText = user.followers.size.toString(), text = "Followers")
-        ProfileStat(numberText = user.following.size.toString(), text = "Following")
+        ProfileStat(navController,numberText = user.posts.size.toString(), text = "Posts")
+        ProfileStat(navController,numberText = user.followers.size.toString(), text = "Followers")
+        ProfileStat(navController,numberText = user.following.size.toString(), text = "Following")
     }
 }
 
 @Composable
 fun ProfileStat(
+    navController: NavController,
     numberText: String,
     text: String,
     modifier: Modifier = Modifier
+
 ) {
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier
+        modifier = modifier.clickable { navController.navigate("following")} // navigate to followers
     ) {
         Text(
             text = numberText,
             fontWeight = FontWeight.Bold,
-            fontSize = 20.sp
+            fontSize = 20.sp,
         )
         Spacer(modifier = Modifier.height(4.dp))
         Text(text = text)

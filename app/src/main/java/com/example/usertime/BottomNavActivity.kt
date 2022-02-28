@@ -28,7 +28,9 @@ fun NavigationGraph(navController: NavHostController) {
             person?.let{
                     ProfileScreen(person,navController)
             }
-
+        }
+        composable("following") {
+                FollowingContent(navController)
         }
     }
 }
