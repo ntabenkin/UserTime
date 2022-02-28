@@ -52,7 +52,7 @@ object DataProvider {
             followers = followersList,
             following = followingList,
             url = "ntabenkin@ovloop.com",
-            profile_description = "My Names Nathan"
+            profile_description = "Android Engineer"
         ),User(
             id = 2,
             name = "Matthew Murphy",

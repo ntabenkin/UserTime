@@ -46,18 +46,18 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 private fun PostImage(post: User) {
-    Spacer(modifier = Modifier.height(16.dp))
     Image(
         painter = painterResource(id = post.avatar),
         contentDescription = null,
         contentScale = ContentScale.Crop,
         modifier = Modifier
             .padding(8.dp)
-            .padding(top = 10.dp)
-            .size(200.dp)
+            .padding(top = 40.dp)
+            .size(300.dp)
             .clip(RoundedCornerShape(corner = CornerSize(16.dp)))
     )
 }
+
 @Composable
 fun PostHomeContent(navController: NavController) {
     val user = remember { DataProvider.userList }
@@ -71,6 +71,7 @@ fun PostHomeContent(navController: NavController) {
             })
     }
 }
+
 @Composable
 fun RecyclerContent(navController: NavController) {
     val vm = UserState.current
@@ -100,53 +101,56 @@ fun RecyclerContent(navController: NavController) {
 }
 
 @Composable
-fun PostListItem(posts:User, navController: NavController) {
+fun PostListItem(posts: User, navController: NavController) {
     val selected = remember { mutableStateOf(false) }
     Card(
         modifier = Modifier
             .padding(horizontal = 8.dp, vertical = 8.dp)
             .fillMaxWidth()
-            .clickable { navController.currentBackStackEntry?.savedStateHandle?.set("user", posts)
-                navController.navigate("profile") },
+            .clickable {
+                navController.currentBackStackEntry?.savedStateHandle?.set("user", posts)
+                navController.navigate("profile")
+            },
         elevation = 2.dp,
         backgroundColor = Color.White,
         shape = RoundedCornerShape(corner = CornerSize(16.dp))
     ) {
+        Row(
+            modifier = Modifier
+                .padding(4.dp)
+        ) {
+            Text(text = posts.name, style = MaterialTheme.typography.h6, color = Color.Black)
+        }
+        Column(
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth()
+                .fillMaxSize()
+        ) {
             PostImage(posts)
-            Column(
-                modifier = Modifier
-                    .padding(16.dp)
-                    .fillMaxWidth()
-                    .fillMaxSize()
+            Text(text = posts.profile_description, style = MaterialTheme.typography.caption)
+            Button(
+                colors = ButtonDefaults.buttonColors(
+                    backgroundColor = if (selected.value) Color.Transparent else Color.Transparent
+                ),
+                onClick = { selected.value = !selected.value },
+                // Uses ButtonDefaults.ContentPadding by default
+                contentPadding = PaddingValues(
+                    start = 2.dp,
+                    top = 10.dp,
+                    end = 25.dp,
+                    bottom = 10.dp
+                )
             ) {
-                Text(text = posts.name, style = MaterialTheme.typography.h6, color = Color.Magenta)
-                Text(text = posts.profile_description, style = MaterialTheme.typography.caption)
-                Spacer(modifier = Modifier.height(16.dp))
-                Button(
-                    modifier = Modifier
-                        .padding(top = 80.dp),
-                    colors = ButtonDefaults.buttonColors(
-                        backgroundColor = if (selected.value) Color.Transparent else Color.Transparent),
-                    onClick = { selected.value = !selected.value } ,
-                    // Uses ButtonDefaults.ContentPadding by default
-                    contentPadding = PaddingValues(
-                        start = 2.dp,
-                        top = 10.dp,
-                        end = 2.dp,
-                        bottom = 10.dp
-                    )
-                ) {
-                    // Inner content including an icon and a text label
-                    Icon(
-                        if(selected.value)Icons.Filled.Favorite else Icons.Outlined.Favorite,
-                        contentDescription = "Favorite",
-                        tint = if(selected.value)Color.Black else Color.White,
-                        modifier = Modifier.size(ButtonDefaults.IconSize)
-                    )
-                    Spacer(Modifier.size(ButtonDefaults.IconSpacing))
-                    if(!selected.value)Text("Like")else Text("")
-                }
+                // Inner content including an icon and a text label
+                Icon(
+                    if (selected.value) Icons.Filled.Favorite else Icons.Outlined.Favorite,
+                    contentDescription = "Favorite",
+                    tint = if (selected.value) Color.Black else Color.White,
+                    modifier = Modifier.size(ButtonDefaults.IconSize)
+                )
+                if (!selected.value) Text("Like") else Text("")
             }
-
+        }
     }
 }
