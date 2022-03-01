@@ -6,7 +6,6 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -17,10 +16,8 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -45,7 +42,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-private fun PostImage(post: User) {
+ fun PostImage(post: User) {
     Image(
         painter = painterResource(id = post.avatar),
         contentDescription = null,
@@ -67,7 +64,7 @@ fun PostHomeContent(navController: NavController) {
         items(
             items = user,
             itemContent = {
-                PostListItem(posts = it, navController = navController)
+                PostListItem(user = it, navController = navController)
             })
     }
 }
@@ -100,15 +97,16 @@ fun RecyclerContent(navController: NavController) {
         })
 }
 
+var list = arrayListOf<User>()
 @Composable
-fun PostListItem(posts: User, navController: NavController) {
+fun PostListItem(user: User, navController: NavController) {
     val selected = remember { mutableStateOf(false) }
     Card(
         modifier = Modifier
             .padding(horizontal = 8.dp, vertical = 8.dp)
             .fillMaxWidth()
             .clickable {
-                navController.currentBackStackEntry?.savedStateHandle?.set("user", posts)
+                navController.currentBackStackEntry?.savedStateHandle?.set("user", user)
                 navController.navigate("profile")
             },
         elevation = 2.dp,
@@ -119,7 +117,7 @@ fun PostListItem(posts: User, navController: NavController) {
             modifier = Modifier
                 .padding(4.dp)
         ) {
-            Text(text = posts.name, style = MaterialTheme.typography.h6, color = Color.Black)
+            Text(text = user.name, style = MaterialTheme.typography.h6, color = Color.Black)
         }
         Column(
             modifier = Modifier
@@ -127,13 +125,13 @@ fun PostListItem(posts: User, navController: NavController) {
                 .fillMaxWidth()
                 .fillMaxSize()
         ) {
-            PostImage(posts)
-            Text(text = posts.profile_description, style = MaterialTheme.typography.caption)
+            PostImage(user)
+            Text(text = user.profile_description, style = MaterialTheme.typography.caption)
             Button(
                 colors = ButtonDefaults.buttonColors(
                     backgroundColor = if (selected.value) Color.Transparent else Color.Transparent
                 ),
-                onClick = { selected.value = !selected.value },
+                onClick = { selected.value = !selected.value; list.add(user)},
                 // Uses ButtonDefaults.ContentPadding by default
                 contentPadding = PaddingValues(
                     start = 2.dp,
@@ -149,8 +147,13 @@ fun PostListItem(posts: User, navController: NavController) {
                     tint = if (selected.value) Color.Black else Color.White,
                     modifier = Modifier.size(ButtonDefaults.IconSize)
                 )
-                if (!selected.value) Text("Like") else Text("")
+                if (!selected.value){
+                    Text("Like")
+                } else {
+                    Text("")
+                }
             }
         }
     }
 }
+
