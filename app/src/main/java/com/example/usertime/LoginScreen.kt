@@ -43,8 +43,7 @@ fun LoginScreen() {
         if (vm.loading) {
             CircularProgressIndicator()
         } else {
-            val team = followingList.size
-            Text("Login Screen $team", fontSize = 32.sp)
+            Text("Login Screen", fontSize = 32.sp)
             Spacer(modifier = Modifier.height(16.dp))
             Email(email)
             Spacer(modifier = Modifier.height(16.dp))

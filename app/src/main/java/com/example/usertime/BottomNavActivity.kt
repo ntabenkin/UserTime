@@ -73,7 +73,7 @@ fun BottomNavMenu(navController: NavController) {
 fun MainScreenView(){
     val navController = rememberNavController()
     Scaffold(
-        bottomBar = { BottomNavMenu(navController = navController) }
+        //bottomBar = { BottomNavMenu(navController = navController) }
     ) {
         NavigationGraph(navController = navController)
     }
