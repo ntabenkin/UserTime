@@ -148,7 +148,7 @@ fun PostListItem(user: User, navController: NavController) {
                     modifier = Modifier.size(ButtonDefaults.IconSize)
                 )
                 if (!selected.value){
-                    Text("Like")
+                    Text("Follow")
                 } else {
                     Text("")
                 }

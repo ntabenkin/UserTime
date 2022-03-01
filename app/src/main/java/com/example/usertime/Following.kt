@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 @Composable
@@ -45,27 +46,41 @@ fun FollowingContent(navController: NavController) {
                 elevation = 10.dp
             )
         }, content = {
-            FollowingHomeContent(navController)
+            FollowingHomeContent(navController,vm,coroutineScope)
         })
 }
 
-
 @Composable
-fun FollowingHomeContent(navController: NavController) {
-    val user = remember { list }
-    LazyColumn(
-        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
-    ) {
-        items(
-            items = user,
-            itemContent = {
-                FollowingListItem(user = it, navController = navController)
-            })
+fun FollowingHomeContent(
+    navController: NavController,
+    vm: UserStateViewModel,
+    coroutineScope: CoroutineScope
+) {
+    if (vm.isBusy) {
+        CircularProgressIndicator()
+    } else {
+        LazyColumn(
+            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
+        ) {
+            items(
+                items = list,
+                itemContent = {
+                    FollowingListItem(user = it, navController = navController,vm,coroutineScope)
+                })
+        }
     }
 }
 
+
+
 @Composable
-fun FollowingListItem(user: User, navController: NavController) {
+fun FollowingListItem(
+    user: User,
+    navController: NavController,
+    vm: UserStateViewModel,
+    coroutineScope: CoroutineScope
+) {
+    val selected = remember { mutableStateOf(true) }
     Card(
         modifier = Modifier
             .padding(horizontal = 8.dp, vertical = 8.dp)
@@ -78,22 +93,54 @@ fun FollowingListItem(user: User, navController: NavController) {
         backgroundColor = Color.White,
         shape = RoundedCornerShape(corner = CornerSize(16.dp))
     ) {
-        Row(
-            modifier = Modifier
-                .padding(4.dp)
-        ) {
-            Text(text = user.name, style = MaterialTheme.typography.h6, color = Color.Black)
-        }
-        Column(
-            modifier = Modifier
-                .padding(16.dp)
-                .fillMaxWidth()
-                .fillMaxSize()
-        ) {
-            PostImage(user)
-            Text(text = user.profile_description, style = MaterialTheme.typography.caption)
-            Text(text = user.url, style = MaterialTheme.typography.caption)
-            Text(text = user.profile_name, style = MaterialTheme.typography.caption)
+            Row(
+                modifier = Modifier
+                    .padding(4.dp)
+            ) {
+                Text(text = user.name, style = MaterialTheme.typography.h6, color = Color.Black)
+            }
+            Column(
+                modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxWidth()
+                    .fillMaxSize()
+            ) {
+                PostImage(user)
+                Text(text = user.profile_description, style = MaterialTheme.typography.caption)
+                Text(text = user.url, style = MaterialTheme.typography.caption)
+                Text(text = user.profile_name, style = MaterialTheme.typography.caption)
+
+                Button(
+                    colors = ButtonDefaults.buttonColors(
+                        backgroundColor = if (selected.value) Color.Transparent else Color.Transparent
+                    ),
+                    onClick = {
+                    coroutineScope.launch {
+                        vm.unFollow(user)
+                    }
+                    },
+                    // Uses ButtonDefaults.ContentPadding by default
+                    contentPadding = PaddingValues(
+                        start = 2.dp,
+                        top = 10.dp,
+                        end = 25.dp,
+                        bottom = 10.dp
+                    )
+                ) {
+                    // Inner content including an icon and a text label
+                    Icon(
+                        if (selected.value) Icons.Filled.Favorite else Icons.Outlined.Favorite,
+                        contentDescription = "Favorite",
+                        tint = if (selected.value) Color.Black else Color.White,
+                        modifier = Modifier.size(ButtonDefaults.IconSize)
+                    )
+                    if (!selected.value) {
+                        Text("Follow")
+                    } else {
+                        Text("UnFollow")
+                    }
+                }
+            }
         }
     }
-}
+
