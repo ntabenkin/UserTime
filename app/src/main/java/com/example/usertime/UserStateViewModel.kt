@@ -10,28 +10,39 @@ import kotlinx.coroutines.delay
 
 class UserStateViewModel : ViewModel() {
     var isLoggedIn by mutableStateOf(false)
-    var isBusy by mutableStateOf(false)
+    var loading by mutableStateOf(false)
+    var error by mutableStateOf(false)
 
     suspend fun signIn(email: String, password: String) {
-        isBusy = true
+        loading = true
         delay(2000)
         isLoggedIn = true
-        isBusy = false
+        loading = false
     }
 
     suspend fun signOut() {
-        isBusy = true
+        loading = true
         delay(2000)
         isLoggedIn = false
-        isBusy = false
+        loading = false
     }
 
     suspend fun unFollow(user:User){
-        isBusy = true
-        list.remove(user)
-        delay(2000)
+        loading = true
+        followingList.remove(user)
+        user.followed = false
+        delay(20)
         isLoggedIn = true
-        isBusy = false
+        loading = false
+    }
+
+   suspend fun follow(user:User){
+        loading = true
+        followingList.add(user)
+        user.followed = true
+        delay(20)
+        isLoggedIn = true
+        loading = false
     }
 }
 

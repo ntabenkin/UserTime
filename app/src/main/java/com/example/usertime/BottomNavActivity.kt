@@ -21,7 +21,7 @@ fun NavigationGraph(navController: NavHostController) {
         composable(BottomNavItem.Home.route) {
             RecyclerContent(navController)
         }
-        composable("profile") {
+        composable(BottomNavItem.Profile.route) {
             val person = navController.previousBackStackEntry?.savedStateHandle?.get<User>("user")
             person?.let{
                     ProfileScreen(person, navController)

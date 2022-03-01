@@ -29,8 +29,8 @@ fun ApplicationSwitcher() {
 
 @Composable
 fun LoginScreen() {
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
+    val email by remember { mutableStateOf("") }
+    val password by remember { mutableStateOf("") }
     val coroutineScope = rememberCoroutineScope()
     val vm = UserState.current
     Column(
@@ -40,10 +40,10 @@ fun LoginScreen() {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        if (vm.isBusy) {
+        if (vm.loading) {
             CircularProgressIndicator()
         } else {
-            val team = list.size
+            val team = followingList.size
             Text("Login Screen $team", fontSize = 32.sp)
             Spacer(modifier = Modifier.height(16.dp))
             Email(email)
