@@ -47,7 +47,7 @@ fun StatSection(modifier: Modifier = Modifier, user: User, navController: NavCon
     ) {
         ProfileStat(navController, numberText = user.posts.size.toString(), text = "Posts")
         ProfileStat(navController, numberText = user.followers.size.toString(), text = "Followers")
-        ProfileStat(navController, numberText = user.following.size.toString(), text = "Following")
+        ProfileStat(navController, numberText = followingList.size.toString(), text = "Following")
     }
 }
 
