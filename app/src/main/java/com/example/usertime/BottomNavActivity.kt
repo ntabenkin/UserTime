@@ -1,10 +1,8 @@
 package com.example.usertime
 
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -26,7 +24,7 @@ fun NavigationGraph(navController: NavHostController) {
         composable("profile") {
             val person = navController.previousBackStackEntry?.savedStateHandle?.get<User>("user")
             person?.let{
-                    ProfileScreen(person,navController)
+                    ProfileScreen(person, navController)
             }
         }
         composable("following") {

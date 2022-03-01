@@ -13,7 +13,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.Icon
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -34,9 +33,11 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.usertime.toolbar.TopBar
 
 
@@ -48,9 +49,10 @@ fun ProfileScreen(user: User, navController: NavController) {
         Column(modifier = Modifier.fillMaxSize()) {
             TopBar(name = user.name, modifier = Modifier.padding(16.dp),navController)
             Spacer(modifier = Modifier.height(4.dp))
+
+            Spacer(modifier = Modifier.height(10.dp))
             ProfileSection(user,navController)
-            Spacer(modifier = Modifier.height(25.dp))
-            Spacer(modifier = Modifier.height(25.dp))
+            
             HighlightSection(
                 highlights = listOf(
                     ImageWithText(
@@ -111,6 +113,13 @@ fun ProfileScreen(user: User, navController: NavController) {
 }
 
 @Composable
+@Preview(showSystemUi = true)
+fun ProfilePagePreview() {
+    ProfileScreen(
+        user = DataProvider.userList[0],
+        navController = rememberNavController())
+}
+
 fun ProfileSection(user: User,navController: NavController) {
     Column(Modifier.fillMaxWidth()) {
         Row(
@@ -147,7 +156,9 @@ fun RoundImage(
     Image(
         painter = image,
         contentDescription = null,
-        modifier = modifier
+        modifier = modifier.clickable {
+
+        }
             .aspectRatio(1f, matchHeightConstraintsFirst = true)
             .border(
                 width = 1.dp,
@@ -156,10 +167,10 @@ fun RoundImage(
             )
             .padding(3.dp)
             .clip(CircleShape)
+
     )
 }
 
-@Composable
 fun StatSection(modifier: Modifier = Modifier,user: User,navController: NavController) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -420,3 +431,4 @@ fun PostSection(
         }
     }
 }
+
