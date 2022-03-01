@@ -120,6 +120,7 @@ fun ProfilePagePreview() {
         navController = rememberNavController())
 }
 
+@Composable
 fun ProfileSection(user: User,navController: NavController) {
     Column(Modifier.fillMaxWidth()) {
         Row(
@@ -171,6 +172,7 @@ fun RoundImage(
     )
 }
 
+@Composable
 fun StatSection(modifier: Modifier = Modifier,user: User,navController: NavController) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
