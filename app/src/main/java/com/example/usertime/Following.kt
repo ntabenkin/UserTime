@@ -8,7 +8,6 @@ import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.runtime.Composable
@@ -19,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.usertime.toolbar.TopBar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -26,28 +26,10 @@ import kotlinx.coroutines.launch
 fun FollowingContent(navController: NavController) {
     val vm = UserState.current
     val coroutineScope = rememberCoroutineScope()
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = {
-                    Text(text = "Android Team")
-                },
-                actions = {
-                    IconButton(onClick = {
-                        coroutineScope.launch {
-                            vm.signOut()
-                        }
-                    }) {
-                        Icon(Icons.Filled.ExitToApp, null)
-                    }
-                },
-                backgroundColor = MaterialTheme.colors.primary,
-                contentColor = Color.White,
-                elevation = 10.dp
-            )
-        }, content = {
-            FollowingHomeContent(navController,vm,coroutineScope)
-        })
+    Column(modifier = Modifier.fillMaxSize()) {
+        TopBar(name = "Team Members Following", modifier = Modifier.padding(16.dp), navController)
+        FollowingHomeContent(navController, vm, coroutineScope)
+    }
 }
 
 @Composable
@@ -56,14 +38,14 @@ fun FollowingHomeContent(
     vm: UserStateViewModel,
     coroutineScope: CoroutineScope
 ) {
-    if (vm.isBusy) {
+    if (vm.loading) {
         CircularProgressIndicator()
     } else {
         LazyColumn(
             contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
         ) {
             items(
-                items = list,
+                items = followingList,
                 itemContent = {
                     FollowingListItem(user = it, navController = navController,vm,coroutineScope)
                 })

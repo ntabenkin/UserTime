@@ -25,6 +25,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
@@ -42,7 +43,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
- fun PostImage(post: User) {
+fun PostImage(post: User) {
     Image(
         painter = painterResource(id = post.avatar),
         contentDescription = null,
@@ -56,16 +57,24 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun PostHomeContent(navController: NavController) {
+fun PostHomeContent(
+    navController: NavController,
+    vm: UserStateViewModel,
+    coroutineScope: CoroutineScope
+) {
     val user = remember { DataProvider.userList }
-    LazyColumn(
-        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
-    ) {
-        items(
-            items = user,
-            itemContent = {
-                PostListItem(user = it, navController = navController)
-            })
+    if (vm.loading) {
+        CircularProgressIndicator()
+    } else {
+        LazyColumn(
+            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
+        ) {
+            items(
+                items = user,
+                itemContent = {
+                    PostListItem(user = it, navController = navController, vm, coroutineScope)
+                })
+        }
     }
 }
 
@@ -93,14 +102,20 @@ fun RecyclerContent(navController: NavController) {
                 elevation = 10.dp
             )
         }, content = {
-            PostHomeContent(navController)
+            PostHomeContent(navController, vm, coroutineScope)
         })
+
 }
 
-var list = arrayListOf<User>()
+var followingList = arrayListOf<User>()
 @Composable
-fun PostListItem(user: User, navController: NavController) {
-    val selected = remember { mutableStateOf(false) }
+fun PostListItem(
+    user: User,
+    navController: NavController,
+    vm: UserStateViewModel,
+    coroutineScope: CoroutineScope
+) {
+    var selected = remember { user.followed }
     Card(
         modifier = Modifier
             .padding(horizontal = 8.dp, vertical = 8.dp)
@@ -129,9 +144,20 @@ fun PostListItem(user: User, navController: NavController) {
             Text(text = user.profile_description, style = MaterialTheme.typography.caption)
             Button(
                 colors = ButtonDefaults.buttonColors(
-                    backgroundColor = if (selected.value) Color.Transparent else Color.Transparent
+                    backgroundColor = if (selected) Color.Transparent else Color.Transparent
                 ),
-                onClick = { selected.value = !selected.value; list.add(user)},
+                onClick = {
+                    selected = !selected
+                    if (selected) {
+                        coroutineScope.launch {
+                            vm.follow(user)
+                        }
+                    } else {
+                        coroutineScope.launch {
+                            vm.unFollow(user)
+                        }
+                    }
+                },
                 // Uses ButtonDefaults.ContentPadding by default
                 contentPadding = PaddingValues(
                     start = 2.dp,
@@ -142,15 +168,15 @@ fun PostListItem(user: User, navController: NavController) {
             ) {
                 // Inner content including an icon and a text label
                 Icon(
-                    if (selected.value) Icons.Filled.Favorite else Icons.Outlined.Favorite,
+                    if (selected) Icons.Filled.Favorite else Icons.Outlined.Favorite,
                     contentDescription = "Favorite",
-                    tint = if (selected.value) Color.Black else Color.White,
+                    tint = if (selected) Color.Black else Color.White,
                     modifier = Modifier.size(ButtonDefaults.IconSize)
                 )
-                if (!selected.value){
+                if (!selected) {
                     Text("Follow")
                 } else {
-                    Text("")
+                    Text("UnFollow")
                 }
             }
         }

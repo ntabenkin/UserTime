@@ -15,5 +15,5 @@ data class User(
     val following: List<String>,
     val url: String,
     val profile_description: String,
-
+    var followed: Boolean
 ) : Parcelable
