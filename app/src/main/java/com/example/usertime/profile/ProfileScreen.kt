@@ -27,7 +27,7 @@ fun ProfileScreen(user: User, navController: NavController) {
     }
     Column(modifier = Modifier.fillMaxSize()) {
 
-        DefaultToolBar(user, navController)
+        DefaultToolBar(user.name, navController)
         Spacer(modifier = Modifier.height(15.dp))
 
         ProfileSection(user, navController)

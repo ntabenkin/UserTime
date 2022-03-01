@@ -25,7 +25,7 @@ import com.example.usertime.profile.components.dropdownmenu.ProfileDropDown
 
 @Composable
 fun DefaultToolBar(
-    user: User,
+    user: String,
     navController: NavController
 ){
     Row(
@@ -45,7 +45,7 @@ fun DefaultToolBar(
                 .clickable { navController.navigate("home") }
         )
         Text(
-            text = user.name,
+            text = user,
             overflow = TextOverflow.Ellipsis,
             fontWeight = FontWeight.Bold,
             fontSize = 22.sp,
@@ -59,7 +59,7 @@ fun DefaultToolBar(
 @Preview(showSystemUi = true)
 fun ToolbarPreview() {
     DefaultToolBar(
-        user = DataProvider.userList[0],
+        user = "",
         navController = rememberNavController()
     )
 }

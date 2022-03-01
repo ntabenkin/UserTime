@@ -18,7 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.usertime.toolbar.TopBar
+import com.example.usertime.common.DefaultToolBar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -27,7 +27,7 @@ fun FollowingContent(navController: NavController) {
     val vm = UserState.current
     val coroutineScope = rememberCoroutineScope()
     Column(modifier = Modifier.fillMaxSize()) {
-        TopBar(name = "Team Members Following", modifier = Modifier.padding(16.dp), navController)
+        DefaultToolBar(user = "Team Members Following", navController)
         FollowingHomeContent(navController, vm, coroutineScope)
     }
 }
