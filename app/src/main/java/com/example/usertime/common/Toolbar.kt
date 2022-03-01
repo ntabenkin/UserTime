@@ -1,10 +1,7 @@
-package com.example.usertime.toolbar
+package com.example.usertime.common
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -16,22 +13,28 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.usertime.dropdownmenu.ProfileDropDown
+import androidx.navigation.compose.rememberNavController
+import com.example.usertime.DataProvider
+import com.example.usertime.User
+import com.example.usertime.profile.components.dropdownmenu.ProfileDropDown
+
 
 @Composable
-fun TopBar(
-    name: String,
-    modifier: Modifier = Modifier,
+fun DefaultToolBar(
+    user: String,
     navController: NavController
-) {
+){
     Row(
-        verticalAlignment = Alignment.CenterVertically,
+        verticalAlignment = Alignment.Top,
         horizontalArrangement = Arrangement.SpaceBetween,
-        modifier = modifier
+        modifier = Modifier
             .fillMaxWidth()
+            .padding(16.dp)
+
     ) {
         Icon(
             imageVector = Icons.Default.ArrowBack,
@@ -42,7 +45,7 @@ fun TopBar(
                 .clickable { navController.navigate("home") }
         )
         Text(
-            text = name,
+            text = user,
             overflow = TextOverflow.Ellipsis,
             fontWeight = FontWeight.Bold,
             fontSize = 22.sp,
@@ -50,4 +53,13 @@ fun TopBar(
         )
         ProfileDropDown()
     }
+}
+
+@Composable
+@Preview(showSystemUi = true)
+fun ToolbarPreview() {
+    DefaultToolBar(
+        user = "",
+        navController = rememberNavController()
+    )
 }
