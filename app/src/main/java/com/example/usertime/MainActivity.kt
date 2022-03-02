@@ -6,6 +6,8 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.runtime.*
+import com.example.usertime.ui.home.UserState
+import com.example.usertime.ui.home.UserStateViewModel
 
 class MainActivity : ComponentActivity() {
     private val userState by viewModels<UserStateViewModel>()
