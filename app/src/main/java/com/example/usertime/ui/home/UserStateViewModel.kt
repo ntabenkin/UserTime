@@ -1,4 +1,4 @@
-package com.example.usertime
+package com.example.usertime.ui.home
 
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.getValue
@@ -6,6 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.example.usertime.data.User
+import com.example.usertime.followingList
 import kotlinx.coroutines.delay
 
 
