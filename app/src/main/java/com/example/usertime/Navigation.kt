@@ -33,7 +33,7 @@ fun NavigationGraph(navController: NavHostController) {
         }
     }
 }
-
+/*
 @Composable
 fun BottomNavMenu(navController: NavController) {
     val items = listOf(
@@ -69,7 +69,7 @@ fun BottomNavMenu(navController: NavController) {
             )
         }
     }
-}
+}*/
 @Composable
 fun MainScreenView(){
     val navController = rememberNavController()

@@ -21,6 +21,8 @@ import androidx.navigation.NavController
 import com.example.usertime.ui.common.PostImage
 import com.example.usertime.data.DataProvider
 import com.example.usertime.data.User
+import com.example.usertime.ui.home.UserState
+import com.example.usertime.ui.home.UserStateViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
