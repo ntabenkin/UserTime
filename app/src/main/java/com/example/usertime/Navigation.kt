@@ -14,7 +14,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.usertime.data.User
-import com.example.usertime.profile.ProfileScreen
+import com.example.usertime.ui.profile.ProfileScreen
 
 @Composable
 fun NavigationGraph(navController: NavHostController) {

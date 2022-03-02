@@ -1,4 +1,4 @@
-package com.example.usertime.profile.components
+package com.example.usertime.ui.profile.components
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -9,7 +9,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.example.usertime.common.ImageWithText
+import com.example.usertime.ui.common.ImageWithText
 
 @Composable
 fun PostTabView(

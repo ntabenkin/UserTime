@@ -1,4 +1,4 @@
-package com.example.usertime.profile
+package com.example.usertime.ui.profile
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
@@ -13,11 +13,11 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.usertime.data.DataProvider
-import com.example.usertime.common.ImageWithText
+import com.example.usertime.ui.common.ImageWithText
 import com.example.usertime.R
 import com.example.usertime.data.User
-import com.example.usertime.common.DefaultToolBar
-import com.example.usertime.profile.components.*
+import com.example.usertime.ui.common.DefaultToolBar
+import com.example.usertime.ui.profile.components.*
 
 
 @Composable

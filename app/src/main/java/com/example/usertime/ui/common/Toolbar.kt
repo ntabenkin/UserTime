@@ -1,4 +1,4 @@
-package com.example.usertime.common
+package com.example.usertime.ui.common
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.usertime.profile.components.dropdownmenu.ProfileDropDown
+import com.example.usertime.ui.profile.components.dropdownmenu.ProfileDropDown
 
 
 @Composable

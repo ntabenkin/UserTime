@@ -18,21 +18,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.usertime.common.DefaultToolBar
-import com.example.usertime.common.PostImage
+import com.example.usertime.ui.common.DefaultToolBar
+import com.example.usertime.ui.common.PostImage
 import com.example.usertime.data.User
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-
-@Composable
-fun FollowingContent(navController: NavController) {
-    val vm = UserState.current
-    val coroutineScope = rememberCoroutineScope()
-    Column(modifier = Modifier.fillMaxSize()) {
-        DefaultToolBar(user = "Team Members Following", navController)
-        FollowingHomeContent(navController, vm, coroutineScope)
-    }
-}
 
 @Composable
 fun FollowingHomeContent(
@@ -52,6 +42,16 @@ fun FollowingHomeContent(
                     FollowingListItem(user = it, navController = navController,vm,coroutineScope)
                 })
         }
+    }
+}
+
+@Composable
+fun FollowingContent(navController: NavController) {
+    val vm = UserState.current
+    val coroutineScope = rememberCoroutineScope()
+    Column(modifier = Modifier.fillMaxSize()) {
+        DefaultToolBar(user = "Team Members Following", navController)
+        FollowingHomeContent(navController, vm, coroutineScope)
     }
 }
 

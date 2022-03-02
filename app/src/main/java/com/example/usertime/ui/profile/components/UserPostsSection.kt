@@ -1,4 +1,4 @@
-package com.example.usertime.profile.components
+package com.example.usertime.ui.profile.components
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image

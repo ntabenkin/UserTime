@@ -1,4 +1,4 @@
-package com.example.usertime.profile.components.dropdownmenu
+package com.example.usertime.ui.profile.components.dropdownmenu
 
 import androidx.compose.runtime.*
 import androidx.compose.ui.geometry.Size

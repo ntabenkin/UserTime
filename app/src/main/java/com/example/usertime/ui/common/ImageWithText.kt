@@ -1,4 +1,4 @@
-package com.example.usertime.common
+package com.example.usertime.ui.common
 
 
 import androidx.compose.ui.graphics.painter.Painter

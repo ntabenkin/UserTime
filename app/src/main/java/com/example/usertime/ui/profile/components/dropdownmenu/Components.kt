@@ -1,4 +1,4 @@
-package com.example.usertime.profile.components.dropdownmenu
+package com.example.usertime.ui.profile.components.dropdownmenu
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
