@@ -5,6 +5,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import com.example.usertime.data.User
 import kotlinx.coroutines.delay
 
 
@@ -27,7 +28,7 @@ class UserStateViewModel : ViewModel() {
         loading = false
     }
 
-    suspend fun unFollow(user:User){
+    suspend fun unFollow(user: User){
         loading = true
         followingList.remove(user)
         user.followed = false
@@ -36,7 +37,7 @@ class UserStateViewModel : ViewModel() {
         loading = false
     }
 
-   suspend fun follow(user:User){
+   suspend fun follow(user: User){
         loading = true
         followingList.add(user)
         user.followed = true

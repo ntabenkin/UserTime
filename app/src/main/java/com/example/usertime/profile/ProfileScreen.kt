@@ -12,10 +12,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.usertime.DataProvider
-import com.example.usertime.ImageWithText
+import com.example.usertime.data.DataProvider
+import com.example.usertime.common.ImageWithText
 import com.example.usertime.R
-import com.example.usertime.User
+import com.example.usertime.data.User
 import com.example.usertime.common.DefaultToolBar
 import com.example.usertime.profile.components.*
 

@@ -19,6 +19,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.usertime.common.DefaultToolBar
+import com.example.usertime.common.PostImage
+import com.example.usertime.data.User
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -52,8 +54,6 @@ fun FollowingHomeContent(
         }
     }
 }
-
-
 
 @Composable
 fun FollowingListItem(

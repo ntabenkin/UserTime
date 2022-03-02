@@ -1,7 +1,9 @@
-package com.example.usertime
+package com.example.usertime.data
+
+import com.example.usertime.R
 
 object DataProvider {
-    val postList = listOf(
+    private val postList = listOf(
         Posts(
             userId = 1,
             img = R.drawable.andres_avatar,

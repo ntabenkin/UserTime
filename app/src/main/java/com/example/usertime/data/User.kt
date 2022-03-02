@@ -1,4 +1,4 @@
-package com.example.usertime
+package com.example.usertime.data
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
