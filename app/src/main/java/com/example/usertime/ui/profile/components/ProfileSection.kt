@@ -1,4 +1,4 @@
-package com.example.usertime.profile.components
+package com.example.usertime.ui.profile.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.usertime.*
-import com.example.usertime.common.RoundImage
+import com.example.usertime.ui.common.RoundImage
 import com.example.usertime.data.User
 
 @Composable

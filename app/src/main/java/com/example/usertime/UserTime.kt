@@ -18,7 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.usertime.common.PostImage
+import com.example.usertime.ui.common.PostImage
 import com.example.usertime.data.DataProvider
 import com.example.usertime.data.User
 import kotlinx.coroutines.CoroutineScope

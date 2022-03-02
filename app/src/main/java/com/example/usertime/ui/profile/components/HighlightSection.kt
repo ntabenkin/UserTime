@@ -1,4 +1,4 @@
-package com.example.usertime.profile.components
+package com.example.usertime.ui.profile.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,8 +12,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.example.usertime.common.ImageWithText
-import com.example.usertime.common.RoundImage
+import com.example.usertime.ui.common.ImageWithText
+import com.example.usertime.ui.common.RoundImage
 
 @Composable
 fun HighlightSection(
