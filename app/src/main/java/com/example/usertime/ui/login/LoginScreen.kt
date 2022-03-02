@@ -14,6 +14,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.usertime.ui.home.UserState
+import com.example.usertime.ui.profile.ProfileState
 import kotlinx.coroutines.launch
 
 
@@ -21,6 +22,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun ApplicationSwitcher() {
     val vm = UserState.current
+    val pm = ProfileState.current
     if (vm.isLoggedIn) {
         MainScreenView()
     } else {
