@@ -1,7 +1,5 @@
-package com.example.usertime
+package com.example.usertime.ui.login
 
-
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -16,19 +14,6 @@ import androidx.compose.ui.unit.sp
 import com.example.usertime.ui.home.UserState
 import com.example.usertime.ui.profile.ProfileState
 import kotlinx.coroutines.launch
-
-
-@ExperimentalFoundationApi
-@Composable
-fun ApplicationSwitcher() {
-    val vm = UserState.current
-    val pm = ProfileState.current
-    if (vm.isLoggedIn) {
-        MainScreenView()
-    } else {
-        LoginScreen()
-    }
-}
 
 @Composable
 fun LoginScreen() {
