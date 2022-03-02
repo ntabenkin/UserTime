@@ -25,7 +25,7 @@ import com.example.usertime.ui.profile.components.dropdownmenu.ProfileDropDown
 fun DefaultToolBar(
     user: String,
     navController: NavController
-){
+) {
     Row(
         verticalAlignment = Alignment.Top,
         horizontalArrangement = Arrangement.SpaceBetween,

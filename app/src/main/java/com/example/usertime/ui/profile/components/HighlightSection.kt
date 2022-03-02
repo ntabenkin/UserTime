@@ -33,29 +33,31 @@ fun HighlightSection(
 ) {
     val vm = ProfileState.current
     val coroutineScope = rememberCoroutineScope()
-        LazyRow(
-            modifier = Modifier
-        ) {
-            items(highlights.size) {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center,
-                    modifier = Modifier.padding(end = 15.dp)
-                        .clickable {
-                            coroutineScope.launch {
-                                vm.expanded()
-                            }}
-                ) {
-                    RoundImage(
-                       image = highlights[it].image,
-                        modifier = Modifier.size(70.dp)
-                    )
-                    Text(
-                        text = highlights[it].text,
-                        overflow = TextOverflow.Ellipsis,
-                        textAlign = TextAlign.Center
-                    )
-                }
+    LazyRow(
+        modifier = Modifier
+    ) {
+        items(highlights.size) {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center,
+                modifier = Modifier
+                    .padding(end = 15.dp)
+                    .clickable {
+                        coroutineScope.launch {
+                            vm.expanded()
+                        }
+                    }
+            ) {
+                RoundImage(
+                    image = highlights[it].image,
+                    modifier = Modifier.size(70.dp)
+                )
+                Text(
+                    text = highlights[it].text,
+                    overflow = TextOverflow.Ellipsis,
+                    textAlign = TextAlign.Center
+                )
             }
         }
+    }
 }

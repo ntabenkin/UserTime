@@ -29,7 +29,7 @@ class UserStateViewModel : ViewModel() {
         loading = false
     }
 
-    suspend fun unFollow(user: User){
+    suspend fun unFollow(user: User) {
         loading = true
         followingList.remove(user)
         user.followed = false
@@ -38,7 +38,7 @@ class UserStateViewModel : ViewModel() {
         loading = false
     }
 
-   suspend fun follow(user: User){
+    suspend fun follow(user: User) {
         loading = true
         followingList.add(user)
         user.followed = true
@@ -48,5 +48,7 @@ class UserStateViewModel : ViewModel() {
     }
 }
 
-val UserState = compositionLocalOf<UserStateViewModel> { error("User State Context Not Found!")
+val UserState = compositionLocalOf<UserStateViewModel> {
+    error("User State Context Not Found!")
 }
+

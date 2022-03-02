@@ -28,6 +28,7 @@ fun PostImage(post: User) {
             .clip(RoundedCornerShape(corner = CornerSize(16.dp)))
     )
 }
+
 @Composable
 fun FullScreenImage(post: User) {
     Image(

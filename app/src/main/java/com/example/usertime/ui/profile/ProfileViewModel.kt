@@ -22,5 +22,6 @@ class ProfileViewModel : ViewModel() {
     }
 }
 
-val ProfileState = compositionLocalOf<ProfileViewModel> { error("Profile State Context Not Found!") }
+val ProfileState =
+    compositionLocalOf<ProfileViewModel> { error("Profile State Context Not Found!") }
 

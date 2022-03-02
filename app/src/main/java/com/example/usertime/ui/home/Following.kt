@@ -32,18 +32,14 @@ fun FollowingHomeContent(
     vm: UserStateViewModel,
     coroutineScope: CoroutineScope
 ) {
-    if (vm.loading) {
-        CircularProgressIndicator()
-    } else {
-        LazyColumn(
-            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
-        ) {
-            items(
-                items = followingList,
-                itemContent = {
-                    FollowingListItem(user = it, navController = navController,vm,coroutineScope)
-                })
-        }
+    LazyColumn(
+        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
+    ) {
+        items(
+            items = followingList,
+            itemContent = {
+                FollowingListItem(user = it, navController = navController, vm, coroutineScope)
+            })
     }
 }
 
@@ -51,9 +47,14 @@ fun FollowingHomeContent(
 fun FollowingContent(navController: NavController) {
     val vm = UserState.current
     val coroutineScope = rememberCoroutineScope()
-    Column(modifier = Modifier.fillMaxSize()) {
-        DefaultToolBar(user = "Team Members Following", navController)
-        FollowingHomeContent(navController, vm, coroutineScope)
+    val size = followingList.size
+    if (vm.loading) {
+        CircularProgressIndicator()
+    } else {
+        Column(modifier = Modifier.fillMaxSize()) {
+            DefaultToolBar(user = "Following $size Team Members", navController)
+            FollowingHomeContent(navController, vm, coroutineScope)
+        }
     }
 }
 
@@ -77,54 +78,54 @@ fun FollowingListItem(
         backgroundColor = Color.White,
         shape = RoundedCornerShape(corner = CornerSize(16.dp))
     ) {
-            Row(
-                modifier = Modifier
-                    .padding(4.dp)
-            ) {
-                Text(text = user.name, style = MaterialTheme.typography.h6, color = Color.Black)
-            }
-            Column(
-                modifier = Modifier
-                    .padding(16.dp)
-                    .fillMaxWidth()
-                    .fillMaxSize()
-            ) {
-                PostImage(user)
-                Text(text = user.profile_description, style = MaterialTheme.typography.caption)
-                Text(text = user.url, style = MaterialTheme.typography.caption)
-                Text(text = user.profile_name, style = MaterialTheme.typography.caption)
+        Row(
+            modifier = Modifier
+                .padding(4.dp)
+        ) {
+            Text(text = user.name, style = MaterialTheme.typography.h6, color = Color.Black)
+        }
+        Column(
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth()
+                .fillMaxSize()
+        ) {
+            PostImage(user)
+            Text(text = user.profile_description, style = MaterialTheme.typography.caption)
+            Text(text = user.url, style = MaterialTheme.typography.caption)
+            Text(text = user.profile_name, style = MaterialTheme.typography.caption)
 
-                Button(
-                    colors = ButtonDefaults.buttonColors(
-                        backgroundColor = if (selected.value) Color.Transparent else Color.Transparent
-                    ),
-                    onClick = {
+            Button(
+                colors = ButtonDefaults.buttonColors(
+                    backgroundColor = if (selected.value) Color.Transparent else Color.Transparent
+                ),
+                onClick = {
                     coroutineScope.launch {
                         vm.unFollow(user)
                     }
-                    },
-                    // Uses ButtonDefaults.ContentPadding by default
-                    contentPadding = PaddingValues(
-                        start = 2.dp,
-                        top = 10.dp,
-                        end = 25.dp,
-                        bottom = 10.dp
-                    )
-                ) {
-                    // Inner content including an icon and a text label
-                    Icon(
-                        if (selected.value) Icons.Filled.Favorite else Icons.Outlined.Favorite,
-                        contentDescription = "Favorite",
-                        tint = if (selected.value) Color.Black else Color.White,
-                        modifier = Modifier.size(ButtonDefaults.IconSize)
-                    )
-                    if (!selected.value) {
-                        Text("Follow")
-                    } else {
-                        Text("UnFollow")
-                    }
+                },
+                // Uses ButtonDefaults.ContentPadding by default
+                contentPadding = PaddingValues(
+                    start = 2.dp,
+                    top = 10.dp,
+                    end = 25.dp,
+                    bottom = 10.dp
+                )
+            ) {
+                // Inner content including an icon and a text label
+                Icon(
+                    if (selected.value) Icons.Filled.Favorite else Icons.Outlined.Favorite,
+                    contentDescription = "Favorite",
+                    tint = if (selected.value) Color.Black else Color.White,
+                    modifier = Modifier.size(ButtonDefaults.IconSize)
+                )
+                if (!selected.value) {
+                    Text("Follow")
+                } else {
+                    Text("UnFollow")
                 }
             }
         }
     }
+}
 

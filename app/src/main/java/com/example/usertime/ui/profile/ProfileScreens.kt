@@ -104,7 +104,7 @@ fun ProfileScreen(user: User, navController: NavController) {
                 )
             }
         }
-    }else {
+    } else {
         Image(
             painter = painterResource(id = user.avatar),
             contentDescription = null,
@@ -119,7 +119,8 @@ fun ProfileScreen(user: User, navController: NavController) {
                 .clickable {
                     coroutineScope.launch {
                         vm.closed()
-                    }}
+                    }
+                }
         )
 
     }

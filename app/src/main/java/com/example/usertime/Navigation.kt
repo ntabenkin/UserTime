@@ -24,15 +24,16 @@ fun NavigationGraph(navController: NavHostController) {
         }
         composable(BottomNavItem.Profile.route) {
             val person = navController.previousBackStackEntry?.savedStateHandle?.get<User>("user")
-            person?.let{
-                    ProfileScreen(person, navController)
+            person?.let {
+                ProfileScreen(person, navController)
             }
         }
         composable("following") {
-                FollowingContent(navController)
+            FollowingContent(navController)
         }
     }
 }
+
 /*
 @Composable
 fun BottomNavMenu(navController: NavController) {
@@ -71,7 +72,7 @@ fun BottomNavMenu(navController: NavController) {
     }
 }*/
 @Composable
-fun MainScreenView(){
+fun MainScreenView() {
     val navController = rememberNavController()
     Scaffold(
         //bottomBar = { BottomNavMenu(navController = navController) }

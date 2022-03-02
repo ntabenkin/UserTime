@@ -14,11 +14,12 @@ import com.example.usertime.ui.profile.ProfileViewModel
 class MainActivity : ComponentActivity() {
     private val userState by viewModels<UserStateViewModel>()
     private val profileState by viewModels<ProfileViewModel>()
+
     @OptIn(ExperimentalFoundationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            CompositionLocalProvider(UserState provides userState ) {
+            CompositionLocalProvider(UserState provides userState) {
                 CompositionLocalProvider(ProfileState provides profileState) {
                     ApplicationSwitcher()
                 }
