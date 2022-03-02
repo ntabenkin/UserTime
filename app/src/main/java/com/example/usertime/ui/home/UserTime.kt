@@ -79,6 +79,7 @@ fun RecyclerContent(navController: NavController) {
 }
 
 var followingList = arrayListOf<User>()
+
 @Composable
 fun PostListItem(
     user: User,

@@ -31,7 +31,7 @@ fun ProfileSection(user: User, navController: NavController) {
                     .weight(3f)
             )
             Spacer(modifier = Modifier.width(16.dp))
-            StatSection(modifier = Modifier.weight(7f),user,navController)
+            StatSection(modifier = Modifier.weight(7f), user, navController)
         }
         Spacer(modifier = Modifier.height(10.dp))
     }

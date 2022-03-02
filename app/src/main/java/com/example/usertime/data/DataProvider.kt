@@ -42,8 +42,7 @@ object DataProvider {
         )
     )
     val followersList = listOf("ntabenkin", "mmurphy34", "aoller44")
-    val followingList =
-        listOf("ntabenkin", "mmurphy34", "aoller44", "ntabenkin", "mmurphy34", "aoller44")
+    val followingList = listOf("ntabenkin", "mmurphy34", "aoller44", "ntabenkin", "mmurphy34", "aoller44")
     val userList = listOf(
         User(
             id = 1,
